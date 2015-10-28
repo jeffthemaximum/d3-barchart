@@ -1,6 +1,6 @@
 from flask import Flask
 from app import config
-import logging
+import logging, sys
 
 app = Flask(__name__)
 
