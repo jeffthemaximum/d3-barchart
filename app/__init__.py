@@ -1,13 +1,18 @@
 from flask import Flask
-from app import config
+from flask.ext.bootstrap import Bootstrap
+from config import config
 import logging, sys
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'hard to guess string'
+bootstrap = Bootstrap()
 
-app.logger.addHandler(logging.StreamHandler(sys.stdout))
-app.logger.setLevel(logging.ERROR)
+def create_app(config_name):
+    app = Flask(__name__)
+    app.config.from_object(config[config_name])
+    config[config_name].init_app(app)
 
-app.config.from_object(config)
+    bootstrap.init_app(app)
 
-from app import routes
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+    return app

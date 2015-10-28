@@ -4,9 +4,9 @@ import json
 from flask import Flask, render_template
 from flask.ext.script import Manager
 from .forms import NameForm
-from app import app
 import string
 import pudb
+from . import main
 
 
 def fetch_json(query):
@@ -47,7 +47,7 @@ def get_alph_count(name_array):
     return letter_count
 
 
-@app.route('/github/<jsdata>')
+@main.route('/github/<jsdata>')
 def github(jsdata):
     # need to add some server side validation of form!!!
     # get form data
@@ -64,13 +64,8 @@ def github(jsdata):
 
     return json.dumps(alph_count)
 
-@app.route('/')
+@main.route('/')
 def index():
     form = NameForm()
 
     return render_template('index.html', form=form)
-
-
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name=name)
