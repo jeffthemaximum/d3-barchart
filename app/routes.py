@@ -68,9 +68,7 @@ def github(jsdata):
 def index():
     form = NameForm()
 
-    return render_template(
-        'index.html',
-        form=form)
+    return render_template('index.html', form=form)
 
 
 @app.route('/user/<name>')
