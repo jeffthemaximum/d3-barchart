@@ -67,20 +67,6 @@ def github(jsdata):
 @app.route('/', methods=['POST', 'GET'])
 def home():
     form = NameForm()
-    if form.validate_on_submit():
-        # #pu.db
-        # # get form data
-        # query = form.name.data
-        # # get json data
-        # response_json = fetch_json(query)
-        # # sort by login name
-        # sorted_response = sorted(response_json['items'], key=lambda k: k['login'])
-        # # get just logins and ignore other data
-        # usernames = get_usernames(sorted_response)
-        # # get first five usernames
-        # first_five_usernames = get_first_five_usernames(usernames)
-        # print 'first five: ' + str(first_five_usernames)
-        pass
 
     return render_template(
         'home.html',
