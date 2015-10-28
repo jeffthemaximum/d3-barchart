@@ -64,12 +64,12 @@ def github(jsdata):
 
     return json.dumps(alph_count)
 
-@app.route('/', methods=['POST', 'GET'])
-def home():
+@app.route('/')
+def index():
     form = NameForm()
 
     return render_template(
-        'home.html',
+        'index.html',
         form=form)
 
 
