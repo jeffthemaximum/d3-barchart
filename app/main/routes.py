@@ -1,4 +1,3 @@
-from __future__ import division
 import urllib2
 import json
 from flask import Flask, render_template
@@ -16,7 +15,10 @@ def fetch_json(query):
 
 def get_first_five_usernames(usernames):
     max_five_usernames = []
-    for i in range(5):
+    search_range = 5
+    if len(usernames) < 5:
+        search_range = len(usernames)
+    for i in range(search_range):
         max_five_usernames.append(usernames[i])
     return max_five_usernames
 
@@ -40,9 +42,6 @@ def get_alph_count(name_array):
     for x in name_chars:
         if x.isalpha():
             letter_count[x] += 1
-    for key in letter_count:
-        freq = (letter_count[key] / total_letters)
-        letter_count[key] = freq
 
     return letter_count
 
@@ -60,6 +59,7 @@ def github(jsdata):
     usernames = get_usernames(sorted_response)
     # get first five usernames
     first_five_usernames = get_first_five_usernames(usernames)
+    print first_five_usernames
     alph_count = get_alph_count(first_five_usernames)
 
     return json.dumps(alph_count)
